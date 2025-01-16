@@ -12,7 +12,6 @@ IDE:
 Visual Studio Code
 
 Project structure
-.
 ├── allure-reports
 ├── allure-results
 ├── Browser
