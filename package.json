@@ -1,0 +1,24 @@
+{
+  "name": "mercadolibre",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test1": "npx playwright test EJERCICIO1",
+    "test2": "npx playwright test EJERCICIO2",
+    "report": "allure generate allure-results -o allure-report --clean",
+    "open": "allure open allure-report",
+    "code": "npx playwright codegen"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.6"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "mercadolibre": "file:"
+  }
+}
