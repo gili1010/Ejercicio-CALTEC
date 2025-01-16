@@ -13,7 +13,7 @@ test.describe('Mercadolibre', () => {
     const ModGriferia = await modulo.textContent();
     console.log('Categoria:', ModGriferia);
     // Validar que el resultado de búsqueda es visible
-    const searchResultLocator = page.locator(meliLocators.totalResultados);
+    const searchResultLocator = page.locator("//div[@class='ui-search-search-result']");
     await expect(searchResultLocator).toBeVisible();
     // Obtener y mostrar el contenido del elemento en la consola
     const searchResultText = await searchResultLocator.textContent();

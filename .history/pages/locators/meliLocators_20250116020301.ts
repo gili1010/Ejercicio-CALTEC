@@ -23,9 +23,7 @@ export const meliLocators = {
 
     //Validaciones
     ValidarModuloSupermercado:"//h1[contains(text(),'Supermercado')]",
-    ValidarModuloGriferia:"//h1[contains(text(),'Grifería para Baño')]",
     ValidarModuloOfertasDelDia:"//span[contains(text(),'Oferta del día')]",
-    ValidarModuloAccesoriosCelulares:"//h2[contains(text(),'Accesorios para Celulares')]",
+    ValidarModuloCelulares:"//h1[contains(text(),'Accesorios para Celulares')]",
     ValidarTotalResultado:"//p[@class='results-quantity']",
-    ValidarModuloCelulares:"//span[contains(text(),'Celulares y Teléfonos')]"
 }

@@ -8,27 +8,21 @@ test.describe('Mercadolibre', () => {
     const page = meli.getPage();
     await meli.selectGriferia();
 
-    await expect(page.locator(meliLocators.ValidarModuloGriferia)).toContainText('Grifería para Baño');
-    const modulo = page.locator(meliLocators.ValidarModuloGriferia);
-    const ModGriferia = await modulo.textContent();
-    console.log('Categoria:', ModGriferia);
+    await expect(page.locator('h1')).toContainText('Grifería para Baño');
     // Validar que el resultado de búsqueda es visible
-    const searchResultLocator = page.locator(meliLocators.totalResultados);
+    const searchResultLocator = page.locator("//div[@class='ui-search-search-result']");
     await expect(searchResultLocator).toBeVisible();
     // Obtener y mostrar el contenido del elemento en la consola
     const searchResultText = await searchResultLocator.textContent();
-    console.log('Total de resultados: ', searchResultText);
+    console.log('Contenido del elemento visible:', searchResultText);
   });
 
   test('Accesorios para Celulares', async () => {
     const page = meli.getPage();
     await meli.selectCelulares();
 
-    await expect(page.locator(meliLocators.ValidarModuloAccesoriosCelulares)).toContainText('Accesorios para Celulares');
-    const modulo = page.locator(meliLocators.ValidarModuloAccesoriosCelulares);
-    const ModCelulares = await modulo.textContent();
-    console.log('Categoria:', ModCelulares);
-    await expect(page.locator(meliLocators.ValidarModuloCelulares)).toContainText('Celulares y Teléfonos');
+    await expect(page.locator('h1')).toContainText('Accesorios para Celulares');
+    await expect(page.locator("//span[contains(text(),'Celulares y Teléfonos')]")).toContainText('Celulares y Teléfonos');
 
   });
 
@@ -41,11 +35,11 @@ test.describe('Mercadolibre', () => {
     const ModOfertas = await modulo.textContent();
     console.log('Categoria:', ModOfertas);
     //validar que el resultado de búsqueda es visible
-    const searchResultLocator = page.locator(meliLocators.ValidarTotalResultado);
+    const searchResultLocator = page.locator("//p[@class='results-quantity']");
     await expect(searchResultLocator).toBeVisible();
     // Obtener y mostrar el contenido del elemento en la consola
     const searchResultText = await searchResultLocator.textContent();
-    console.log('Total de resultados: ', searchResultText);
+    console.log('Contenido del elemento visible:', searchResultText);
   });
 
   test('Capsulas', async () => {
@@ -61,7 +55,7 @@ test.describe('Mercadolibre', () => {
     await expect(searchResultLocator).toBeVisible();
     //Mostrar el total de resultados por consola y reporte
     const searchResultText = await searchResultLocator.textContent();
-    console.log('Total de resultados: ', searchResultText);
+    console.log('Total de resultados:', searchResultText);
   });
 
 });
