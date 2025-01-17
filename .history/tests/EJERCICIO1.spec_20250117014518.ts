@@ -66,25 +66,20 @@ test.describe('Mercadolibre', () => {
   });
 
   test('Capsulas', async () => {
-    try{
-        const page = meli.getPage();
-        await meli.irAPage();
-        await meli.selectCapsulas();
+    const page = meli.getPage();
+    await meli.irAPage();
+    await meli.selectCapsulas();
 
-        await expect(page.locator(meliLocators.ValidarModuloSupermercado)).toContainText('Supermercado');
-        const modulo = page.locator(meliLocators.ValidarModuloSupermercado);
-        const ModSupermercado = await modulo.textContent();
-        console.log('Categoria:', ModSupermercado);
-        //Validar que el resultado de búsqueda es visible
-        const searchResultLocator = page.locator(meliLocators.totalResultados);
-        await expect(searchResultLocator).toBeVisible();
-        //Mostrar el total de resultados por consola y reporte
-        const searchResultText = await searchResultLocator.textContent();
-        console.log('Total de resultados: ', searchResultText);
-    } catch (error) {
-        console.error(`Error en el test 'Capsulas': ${error.message}`);
-        throw error;
-      }
+    await expect(page.locator(meliLocators.ValidarModuloSupermercado)).toContainText('Supermercado');
+    const modulo = page.locator(meliLocators.ValidarModuloSupermercado);
+    const ModSupermercado = await modulo.textContent();
+    console.log('Categoria:', ModSupermercado);
+    //Validar que el resultado de búsqueda es visible
+    const searchResultLocator = page.locator(meliLocators.totalResultados);
+    await expect(searchResultLocator).toBeVisible();
+    //Mostrar el total de resultados por consola y reporte
+    const searchResultText = await searchResultLocator.textContent();
+    console.log('Total de resultados: ', searchResultText);
   });
 
 });

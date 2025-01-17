@@ -11,11 +11,7 @@ export class BasePage {
 
     //ir a la web
     async gotoPage(url: string) {
-        try{
-            await this.page.goto(url);
-        } catch (error) {
-            throw new Error(`Error al navegar a la URL ${url}: ${error.message}`);
-        }
+        await this.page.goto(url);
     }
 
     protected getLocator(locator: string) {
@@ -48,23 +44,14 @@ export class BasePage {
             await element.press('Enter');
         } catch (error) {
             throw new Error(`Error al presionar Enter en el elemento ${locator}: ${error.message}`);
-        }
     }
 
     async expectVisible(locator: string) {
-        try{
-            await expect(this.page.locator(locator)).toBeVisible();
-        } catch (error) {
-            throw new Error(`Error al verificar visibilidad del elemento ${locator}: ${error.message}`);
-        }
+        await expect(this.page.locator(locator)).toBeVisible();
     }
 
      // Validar texto en un elemento
     async expectText(locator: string, expectedText: string) {
-        try{
-            await expect(this.getLocator(locator)).toHaveText(expectedText);
-        } catch (error) {
-            throw new Error(`Error al verificar el texto del elemento ${locator}: ${error.message}`);
-        }
+        await expect(this.getLocator(locator)).toHaveText(expectedText);
     }    
 }

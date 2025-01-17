@@ -11,11 +11,7 @@ export class BasePage {
 
     //ir a la web
     async gotoPage(url: string) {
-        try{
-            await this.page.goto(url);
-        } catch (error) {
-            throw new Error(`Error al navegar a la URL ${url}: ${error.message}`);
-        }
+        await this.page.goto(url);
     }
 
     protected getLocator(locator: string) {

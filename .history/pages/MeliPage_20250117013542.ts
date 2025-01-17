@@ -25,66 +25,46 @@ export class MeliPage extends BasePage {
         }
 
         async selectGriferia(){
-            try{
-                await this.clickElement(meliLocators.masTarde);
-                await this.clickElement(meliLocators.categorias);
-                await this.clickElement(meliLocators.construccion);
-                await this.clickElement(meliLocators.verMas);
-                await this.clickElement(meliLocators.griferiaParaBano);
-            } catch (error) {
-                throw new Error(`Error al seleccionar Grifería para Baño: ${error.message}`);
-            }
+            await this.clickElement(meliLocators.masTarde);
+            await this.clickElement(meliLocators.categorias);
+            await this.clickElement(meliLocators.construccion);
+            await this.clickElement(meliLocators.verMas);
+            await this.clickElement(meliLocators.griferiaParaBano);
         }
 
         async selectCelulares(){
-            try{
-                await this.clickElement(meliLocators.masTarde);
-                await this.clickElement(meliLocators.categorias);
-                await this.clickElement(meliLocators.tecnologia);
-                await this.clickElement(meliLocators.AccesorioCelulares);
-            } catch (error) {
-                throw new Error(`Error al seleccionar Accesorios para Celulares: ${error.message}`);
-            }
+            await this.clickElement(meliLocators.masTarde);
+            await this.clickElement(meliLocators.categorias);
+            await this.clickElement(meliLocators.tecnologia);
+            await this.clickElement(meliLocators.AccesorioCelulares);
         }
 
         async selectOfertaDelDia(){
-            try{
-                await this.clickElement(meliLocators.masTarde);
-                await this.clickElement(meliLocators.Ofertas);
-                await this.clickElement(meliLocators.OfertasDelDia);
-            } catch (error) {
-                throw new Error(`Error al seleccionar Ofertas del Día: ${error.message}`);
-            }
+            await this.clickElement(meliLocators.masTarde);
+            await this.clickElement(meliLocators.Ofertas);
+            await this.clickElement(meliLocators.OfertasDelDia);
         }
 
         async selectCapsulas(){
-            try{
-                await this.clickElement(meliLocators.masTarde);
-                await this.clickElement(meliLocators.categorias);
-                await this.clickElement(meliLocators.Supermercado);
-                await this.clickElement(meliLocators.Capsulas);
-            } catch (error) {
-                throw new Error(`Error al seleccionar Cápsulas: ${error.message}`);
-            }
+            await this.clickElement(meliLocators.masTarde);
+            await this.clickElement(meliLocators.categorias);
+            await this.clickElement(meliLocators.Supermercado);
+            await this.clickElement(meliLocators.Capsulas);
         }
 
         async selectVehiculos(){
-            try{
-                await this.clickElement(meliLocators.masTarde);
-                await this.clickElement(meliLocators.categorias);
-                await this.clickElement(meliLocators.Vehiculos);
-                await this.clickElement(meliLocators.AutosUsados);
-                const { precioMinimoFormateado, precioMaximoFormateado } = await this.filtroPrecio();
-                const { kmMinimoFormateado, kmMaximoFormateado } = await this.filtroKm();
-                return {
-                    precioMinimoFormateado,
-                    precioMaximoFormateado,
-                    kmMinimoFormateado,
-                    kmMaximoFormateado
-                };  
-        } catch (error) {
-            throw new Error(`Error al seleccionar Vehículos: ${error.message}`);
-        }    
+            await this.clickElement(meliLocators.masTarde);
+            await this.clickElement(meliLocators.categorias);
+            await this.clickElement(meliLocators.Vehiculos);
+            await this.clickElement(meliLocators.AutosUsados);
+            const { precioMinimoFormateado, precioMaximoFormateado } = await this.filtroPrecio();
+            const { kmMinimoFormateado, kmMaximoFormateado } = await this.filtroKm();
+            return {
+                precioMinimoFormateado,
+                precioMaximoFormateado,
+                kmMinimoFormateado,
+                kmMaximoFormateado
+            };      
         }
 
         private async filtroPrecio(){

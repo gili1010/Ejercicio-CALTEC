@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "npx playwright test",
     "test1": "npx playwright test EJERCICIO1",
     "test2": "npx playwright test EJERCICIO2",
     "reporte": "npx playwright show-report",
