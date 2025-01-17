@@ -49,6 +49,7 @@ test.describe('Mercadolibre', () => {
         console.log('Categoria:', ModOfertas);
         // Validar que el resultado de búsqueda es visible
         await meli.validarExistencia(meliLocators.ValidarTotalResultado);
+
         // Obtener y mostrar el contenido del elemento en la consola
         const searchResultText=await meli.obtenerTexto(meliLocators.ValidarTotalResultado);
         console.log('Total de resultados: ', searchResultText);
@@ -60,16 +61,19 @@ test.describe('Mercadolibre', () => {
 
   test('Capsulas', async () => {
     try{
+        const page = meli.getPage();
         await meli.irAPage();
         await meli.selectCapsulas();
-        await meli.validarTexto(meliLocators.ValidarModuloSupermercado,'Supermercado');
-        //obtener categoria y mostrarlo por consola
-        const ModSupermercado=await meli.obtenerTexto(meliLocators.ValidarModuloSupermercado);
+
+        await expect(page.locator(meliLocators.ValidarModuloSupermercado)).toContainText('Supermercado');
+        const modulo = page.locator(meliLocators.ValidarModuloSupermercado);
+        const ModSupermercado = await modulo.textContent();
         console.log('Categoria:', ModSupermercado);
-        // Validar que el resultado de búsqueda es visible
-        await meli.validarExistencia(meliLocators.totalResultados);
+        //Validar que el resultado de búsqueda es visible
+        const searchResultLocator = page.locator(meliLocators.totalResultados);
+        await expect(searchResultLocator).toBeVisible();
         //Mostrar el total de resultados por consola y reporte
-        const searchResultText=await meli.obtenerTexto(meliLocators.totalResultados);
+        const searchResultText = await searchResultLocator.textContent();
         console.log('Total de resultados: ', searchResultText);
     } catch (error) {
         console.error(`Error en el test 'Capsulas': ${error.message}`);

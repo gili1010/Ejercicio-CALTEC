@@ -168,23 +168,10 @@ export class MeliPage extends BasePage {
         //validaciones
         async validarTexto(locator: string, expectedText: string){
             try{
-                await this.expectText(locator,expectedText);
+                await expect(this.getLocator(locator)).toContainText(expectedText);
             } catch (error) {
-                throw new Error(`Error al validar el texto del elemento ${locator}: ${error.message}`);
+                throw new Error(`Error al verificar el texto del elemento ${locator}: ${error.message}`);
             }
-        }
-
-        async validarExistencia(locator: string) {
-            try{
-                await this.expectVisible(locator);
-            } catch (error) {
-                throw new Error(`Error al validar visibilidad del elemento ${locator}: ${error.message}`);
-            }
-        }
-        // Método para llamar a getText y devolver el texto
-        async obtenerTexto(locator: string){
-            const texto = await this.getText(locator);
-            return texto
         }
 
 }

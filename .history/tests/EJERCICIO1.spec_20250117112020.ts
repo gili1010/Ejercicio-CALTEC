@@ -6,6 +6,7 @@ test.describe('Mercadolibre', () => {
 
   test('Grifería para Baño', async ({  }) => {
       try{
+        const page = meli.getPage();
         await meli.irAPage();
         await meli.selectGriferia();
 
@@ -15,8 +16,8 @@ test.describe('Mercadolibre', () => {
         console.log('Categoria:', ModGriferia);
         // Validar que el resultado de búsqueda es visible
         await meli.validarExistencia(meliLocators.totalResultados);
-        // Obtener y mostrar el contenido del elemento en la consola
         const searchResultText=await meli.obtenerTexto(meliLocators.totalResultados);
+        // Obtener y mostrar el contenido del elemento en la consola
         console.log('Total de resultados: ', searchResultText);
     } catch (error) {
         console.error(`Error en el test 'Grifería para Baño': ${error.message}`);
@@ -26,13 +27,15 @@ test.describe('Mercadolibre', () => {
 
   test('Accesorios para Celulares', async () => {
     try{
+        const page = meli.getPage();
         await meli.irAPage();
         await meli.selectCelulares();
-        await meli.validarTexto(meliLocators.ValidarModuloAccesoriosCelulares,'Accesorios para Celulares');
-        //obtener categoria y mostrarlo por consola
-        const ModCelulares=await meli.obtenerTexto(meliLocators.ValidarModuloAccesoriosCelulares);
+
+        await expect(page.locator(meliLocators.ValidarModuloAccesoriosCelulares)).toContainText('Accesorios para Celulares');
+        const modulo = page.locator(meliLocators.ValidarModuloAccesoriosCelulares);
+        const ModCelulares = await modulo.textContent();
         console.log('Categoria:', ModCelulares);
-        await meli.validarTexto(meliLocators.ValidarModuloCelulares,'Celulares y Teléfonos');
+        await expect(page.locator(meliLocators.ValidarModuloCelulares)).toContainText('Celulares y Teléfonos');
     } catch (error) {
         console.error(`Error en el test 'Accesorios para Celulares': ${error.message}`);
         throw error;
@@ -41,16 +44,19 @@ test.describe('Mercadolibre', () => {
 
   test('Ofertas del dia', async () => {
     try{
+        const page = meli.getPage();
         await meli.irAPage();
         await meli.selectOfertaDelDia();
-        await meli.validarTexto(meliLocators.ValidarModuloOfertasDelDia,'Oferta del día');
-        //obtener categoria y mostrarlo por consola
-        const ModOfertas=await meli.obtenerTexto(meliLocators.ValidarModuloOfertasDelDia);
+
+        await expect(page.locator(meliLocators.ValidarModuloOfertasDelDia)).toContainText('Oferta del día');
+        const modulo = page.locator(meliLocators.ValidarModuloOfertasDelDia);
+        const ModOfertas = await modulo.textContent();
         console.log('Categoria:', ModOfertas);
-        // Validar que el resultado de búsqueda es visible
-        await meli.validarExistencia(meliLocators.ValidarTotalResultado);
+        //validar que el resultado de búsqueda es visible
+        const searchResultLocator = page.locator(meliLocators.ValidarTotalResultado);
+        await expect(searchResultLocator).toBeVisible();
         // Obtener y mostrar el contenido del elemento en la consola
-        const searchResultText=await meli.obtenerTexto(meliLocators.ValidarTotalResultado);
+        const searchResultText = await searchResultLocator.textContent();
         console.log('Total de resultados: ', searchResultText);
     } catch (error) {
         console.error(`Error en el test 'Ofertas del dia': ${error.message}`);
@@ -60,16 +66,19 @@ test.describe('Mercadolibre', () => {
 
   test('Capsulas', async () => {
     try{
+        const page = meli.getPage();
         await meli.irAPage();
         await meli.selectCapsulas();
-        await meli.validarTexto(meliLocators.ValidarModuloSupermercado,'Supermercado');
-        //obtener categoria y mostrarlo por consola
-        const ModSupermercado=await meli.obtenerTexto(meliLocators.ValidarModuloSupermercado);
+
+        await expect(page.locator(meliLocators.ValidarModuloSupermercado)).toContainText('Supermercado');
+        const modulo = page.locator(meliLocators.ValidarModuloSupermercado);
+        const ModSupermercado = await modulo.textContent();
         console.log('Categoria:', ModSupermercado);
-        // Validar que el resultado de búsqueda es visible
-        await meli.validarExistencia(meliLocators.totalResultados);
+        //Validar que el resultado de búsqueda es visible
+        const searchResultLocator = page.locator(meliLocators.totalResultados);
+        await expect(searchResultLocator).toBeVisible();
         //Mostrar el total de resultados por consola y reporte
-        const searchResultText=await meli.obtenerTexto(meliLocators.totalResultados);
+        const searchResultText = await searchResultLocator.textContent();
         console.log('Total de resultados: ', searchResultText);
     } catch (error) {
         console.error(`Error en el test 'Capsulas': ${error.message}`);

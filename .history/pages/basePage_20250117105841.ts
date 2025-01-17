@@ -67,16 +67,4 @@ export class BasePage {
             throw new Error(`Error al verificar el texto del elemento ${locator}: ${error.message}`);
         }
     }    
-
-    async getText(locator: string): Promise<string> {
-        try {
-          const text = await this.page.locator(locator).textContent();
-          if (text === null) {
-            throw new Error(`El texto del elemento ${locator} es nulo.`);
-          }
-          return text;
-        } catch (error) {
-          throw new Error(`Error al obtener el texto del elemento ${locator}: ${error.message}`);
-        }
-      }
 }

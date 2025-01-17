@@ -174,17 +174,4 @@ export class MeliPage extends BasePage {
             }
         }
 
-        async validarExistencia(locator: string) {
-            try{
-                await this.expectVisible(locator);
-            } catch (error) {
-                throw new Error(`Error al validar visibilidad del elemento ${locator}: ${error.message}`);
-            }
-        }
-        // Método para llamar a getText y devolver el texto
-        async obtenerTexto(locator: string){
-            const texto = await this.getText(locator);
-            return texto
-        }
-
 }
