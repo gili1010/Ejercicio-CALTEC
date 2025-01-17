@@ -34,10 +34,11 @@ test.describe('Mercadolibre Ejercicio 2', () => {
 
   test('Buscador', async () => {
     const page = meli.getPage();
-    const producto = await meli.Buscador();
-    // Validar busqueda
-    console.log('Producto Buscado: ', producto.producto);
-    await expect(page.locator(`//h1[contains(text(),${producto.producto})]`)).toContainText(`${producto.producto}`);
+    const { precioMinimoFormateado, precioMaximoFormateado } = await meli.selectCompraInternacional();
+    const rangoPreciosXPath = `//div[contains(text(),"$${precioMinimoFormateado} a $${precioMaximoFormateado}")]`;
+
+    // Validar el rango de precios en los resultados
+    await expect(page.locator(rangoPreciosXPath)).toContainText(`$${precioMinimoFormateado} a $${precioMaximoFormateado}`);
 
     // Validar que el resultado de búsqueda es visible
     const searchResultLocator = page.locator(meliLocators.totalResultados);
@@ -45,6 +46,8 @@ test.describe('Mercadolibre Ejercicio 2', () => {
     // Obtener y mostrar el contenido del elemento en la consola
     const searchResultText = await searchResultLocator.textContent();
     console.log('Total resultados:', searchResultText);
+
+    await expect(page.locator("//p[contains(text(),'Compra internacional')]")).toContainText('Compra internacional');
   });
 
 });

@@ -8,15 +8,15 @@ test.describe('Mercadolibre Ejercicio 2', () => {
 
   test('Autos Usados', async ({  }) => {
     const page = meli.getPage();
-    const { precioMaximoFormateado, kmMinimoFormateado, kmMaximoFormateado } = await meli.selectVehiculos();
+    const { precioMinimoFormateado, precioMaximoFormateado, kmMinimoFormateado, kmMaximoFormateado } = await meli.selectVehiculos();
     
 
     try{
-      const rangoPreciosXPath = `//div[contains(text(),"Hasta $ ${precioMaximoFormateado}")]`;
+      const rangoPreciosXPath = `//div[contains(text(),"$${precioMinimoFormateado} a $${precioMaximoFormateado}")]`;
       const rangoKmXPath = `//div[contains(text(),"${kmMinimoFormateado} a ${kmMaximoFormateado} km")]`;
 
       // Validar el rango de precios en los resultados
-      await expect(page.locator(rangoPreciosXPath)).toContainText(`Hasta $ ${precioMaximoFormateado}`);
+      await expect(page.locator(rangoPreciosXPath)).toContainText(`Hasta ${kmMaximoFormateado} km`);
       await expect(page.locator(rangoKmXPath)).toContainText(`${kmMinimoFormateado} a ${kmMaximoFormateado} km`);
         console.log('Rango de precios y KM encontrado correctamente.');
       } catch (error) {
@@ -32,12 +32,13 @@ test.describe('Mercadolibre Ejercicio 2', () => {
     console.log('Total resultados:', searchResultText);
   });
 
-  test('Buscador', async () => {
+  test('Compras Internacionales', async () => {
     const page = meli.getPage();
-    const producto = await meli.Buscador();
-    // Validar busqueda
-    console.log('Producto Buscado: ', producto.producto);
-    await expect(page.locator(`//h1[contains(text(),${producto.producto})]`)).toContainText(`${producto.producto}`);
+    const { precioMinimoFormateado, precioMaximoFormateado } = await meli.selectCompraInternacional();
+    const rangoPreciosXPath = `//div[contains(text(),"$${precioMinimoFormateado} a $${precioMaximoFormateado}")]`;
+
+    // Validar el rango de precios en los resultados
+    await expect(page.locator(rangoPreciosXPath)).toContainText(`$${precioMinimoFormateado} a $${precioMaximoFormateado}`);
 
     // Validar que el resultado de búsqueda es visible
     const searchResultLocator = page.locator(meliLocators.totalResultados);
@@ -45,6 +46,8 @@ test.describe('Mercadolibre Ejercicio 2', () => {
     // Obtener y mostrar el contenido del elemento en la consola
     const searchResultText = await searchResultLocator.textContent();
     console.log('Total resultados:', searchResultText);
+
+    await expect(page.locator("//p[contains(text(),'Compra internacional')]")).toContainText('Compra internacional');
   });
 
 });

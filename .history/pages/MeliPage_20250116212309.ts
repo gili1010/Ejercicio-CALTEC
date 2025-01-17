@@ -115,16 +115,16 @@ export class MeliPage extends BasePage {
         }
 
         async Buscador(){
-            try{
-                const producto:string = process.env.npm_config_PRODUCTO || 'PS5'; 
-                await this.clickElement(meliLocators.masTarde);
-                await this.clickElement(meliLocators.Buscador);
-                await this.fillLocator(meliLocators.Buscador, producto);
-                await this.enter(meliLocators.Buscador);
-                return {producto};
-            } catch (error) {
-                throw new Error(`Error al realizar la búsqueda. Detalles: ${error.message}`);
-            }
+            const Buscar = {
+                producto: process.env.npm_config_PRODUCTO || 'PS5', // Valor por defecto
+              };
+            await this.clickElement(meliLocators.Buscador);
+            await this.fillLocator(meliLocators.Buscador, Buscar.producto);
+            await this.enter(meliLocators.Buscador);
+            const prod = Buscar.producto;
+            return {
+                prod,
+             };
         }
 
         async formatNumberWithDots(value: string): Promise<string> {

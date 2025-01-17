@@ -117,7 +117,6 @@ export class MeliPage extends BasePage {
         async Buscador(){
             try{
                 const producto:string = process.env.npm_config_PRODUCTO || 'PS5'; 
-                await this.clickElement(meliLocators.masTarde);
                 await this.clickElement(meliLocators.Buscador);
                 await this.fillLocator(meliLocators.Buscador, producto);
                 await this.enter(meliLocators.Buscador);

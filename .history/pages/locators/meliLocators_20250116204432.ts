@@ -19,10 +19,9 @@ export const meliLocators = {
     VerMasCI:"//h2[text()='Lo mejor en Tecnología']/..//a[contains(text(),'Ver más')]",
     PrecioDesde:"//input[@data-testid='Minimum-price']",
     PrecioHasta:"//input[@data-testid='Maximum-price']",
-    AplicarPrecio:"//button[@data-testid='submit-price']",
     KmDesde:"//input[@data-testid='Minimum-KILOMETERS']",
     KmHasta:"//input[@data-testid='Maximum-KILOMETERS']",
-    Buscador:"//input[@id='cb1-edit']",
+    AplicarPrecio:"//button[@data-testid='submit-price']",
 
     //Validaciones
     ValidarModuloSupermercado:"//h1[contains(text(),'Supermercado')]",

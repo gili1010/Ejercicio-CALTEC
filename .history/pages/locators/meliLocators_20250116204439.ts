@@ -22,7 +22,6 @@ export const meliLocators = {
     AplicarPrecio:"//button[@data-testid='submit-price']",
     KmDesde:"//input[@data-testid='Minimum-KILOMETERS']",
     KmHasta:"//input[@data-testid='Maximum-KILOMETERS']",
-    Buscador:"//input[@id='cb1-edit']",
 
     //Validaciones
     ValidarModuloSupermercado:"//h1[contains(text(),'Supermercado')]",

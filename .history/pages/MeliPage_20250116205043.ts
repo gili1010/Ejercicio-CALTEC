@@ -49,12 +49,9 @@ export class MeliPage extends BasePage {
             await this.clickElement(meliLocators.Vehiculos);
             await this.clickElement(meliLocators.AutosUsados);
             const { precioMinimoFormateado, precioMaximoFormateado } = await this.filtroPrecio();
-            const { kmMinimoFormateado, kmMaximoFormateado } = await this.filtroKm();
             return {
                 precioMinimoFormateado,
-                precioMaximoFormateado,
-                kmMinimoFormateado,
-                kmMaximoFormateado
+                precioMaximoFormateado
             };      
         }
 
@@ -102,29 +99,28 @@ export class MeliPage extends BasePage {
                  await this.enter(meliLocators.KmHasta);
      
                         // Formatear los valores de precio con separadores de miles
-                 const kmMinimoFormateado = await this.formatNumberWithDots(filtros.KmMinimo);
-                 const kmMaximoFormateado = await this.formatNumberWithDots(filtros.KmMaximo);
-                 console.log(`Parametro KM Minimo: ${kmMinimoFormateado}`);
-                 console.log(`Parametro KM Maximo: ${kmMaximoFormateado}`);
+                 const precioMinimoFormateado = await this.formatNumberWithDots(filtros.KmMinimo);
+                 const precioMaximoFormateado = await this.formatNumberWithDots(filtros.KmMaximo);
+                 console.log(`Parametro KM Minimo: ${precioMinimoFormateado}`);
+                 console.log(`Parametro KM Maximo: ${precioMaximoFormateado}`);
      
                  // Retornar los valores formateados para usarlos en el test
                  return {
-                    kmMinimoFormateado,
-                    kmMaximoFormateado
+                     precioMinimoFormateado,
+                     precioMaximoFormateado
                  };
         }
 
-        async Buscador(){
-            try{
-                const producto:string = process.env.npm_config_PRODUCTO || 'PS5'; 
-                await this.clickElement(meliLocators.masTarde);
-                await this.clickElement(meliLocators.Buscador);
-                await this.fillLocator(meliLocators.Buscador, producto);
-                await this.enter(meliLocators.Buscador);
-                return {producto};
-            } catch (error) {
-                throw new Error(`Error al realizar la búsqueda. Detalles: ${error.message}`);
-            }
+        async selectCompraInternacional(){
+            await this.clickElement(meliLocators.masTarde);
+            await this.clickElement(meliLocators.categorias);
+            await this.clickElement(meliLocators.CompraInternacional);
+            await this.clickElement(meliLocators.VerMasCI);
+            const { precioMinimoFormateado, precioMaximoFormateado } = await this.filtroPrecio();
+            return {
+                precioMinimoFormateado,
+                precioMaximoFormateado
+            };
         }
 
         async formatNumberWithDots(value: string): Promise<string> {
